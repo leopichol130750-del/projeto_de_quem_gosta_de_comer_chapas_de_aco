@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="dashboard">
+        <title>Smartech</title>
+        <div class="sidebar">
+        <h2>Smartech</h2>
+        <button id="BotaoAddChapa">Adicionar</button>
+        <button id="BotaoListarChapas">Listar</button>
+        </div>
+
+        <div class="main">
+    
+            <div id="inputs_chapas" style="display: none;">
+                <input type="number" id="x" placeholder="Medida X">
+                <input type="number" id="y" placeholder="Medida Y">
+                <input type="number" id="esp" placeholder="Espessura">
+                <input type="text" id="mat" placeholder="Material">
+                <button id="BotaoSalvar">Salvar</button>
+            </div>
+
+            <div id="lista"></div>
+
+        <div id="zoom" class="zoomOverlay">
+            <div class="zoomCard">
+
+                <h2 class="tituloEdicao">Smartech Edição</h2>
+
+                <div id="previewEdicao"></div>
+
+                <div class="gridEdicao">
+                    <div class="campo">
+                        <label for="edit_x">Medida X</label>
+                        <input type="number" id="edit_x" placeholder="Medida X">
+                    </div>
+
+                    <div class="campo">
+                        <label for="edit_esp">Espessura</label>
+                        <input type="number" id="edit_esp" placeholder="Espessura">
+                    </div>
+
+                    <div class="campo">
+                        <label for="edit_y">Medida Y</label>
+                        <input type="number" id="edit_y" placeholder="Medida Y">
+                    </div>
+
+                    <div class="campo">
+                        <label for="edit_mat">Material</label>
+                        <input type="text" id="edit_mat" placeholder="Material">
+                    </div>
+
+                    <button id="salvarEdicao">Salvar Edição</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="{{url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
