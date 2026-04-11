@@ -14,7 +14,7 @@ def criar_tabela():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS chapas (
             id SERIAL PRIMARY KEY,
-            medidax INT,
+            largurax INT,
             larguray INT,
             espessura NUMERIC(5,2),
             material TEXT

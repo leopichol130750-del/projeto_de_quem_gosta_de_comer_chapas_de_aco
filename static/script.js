@@ -13,7 +13,7 @@ function mostrar_aba(nome_aba) {
     }
 
     else if (nome_aba ==="zoom") {
-        document.getElementById("zomm").style.display = "block";
+        document.getElementById("zoom").style.display = "block";
     }
 }
     
