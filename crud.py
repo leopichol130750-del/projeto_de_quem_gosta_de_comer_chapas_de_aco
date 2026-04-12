@@ -58,6 +58,3 @@ def atualizar_chapa(id, largurax, larguray,espessura, material):
         """,(largurax, larguray, espessura, material, id))
     conexao.commit()
     conexao.close()
-
-
-print(listar_chapas())
