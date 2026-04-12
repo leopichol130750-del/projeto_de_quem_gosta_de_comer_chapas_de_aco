@@ -2,10 +2,7 @@ import psycopg2
 
 def conectar():
     return psycopg2.connect(
-        host="localhost",
-        database="postgres",
-        user="postgres",
-        password="monster"
+        "postgresql://neondb_owner:npg_dBWfMT9S3Hmb@ep-wispy-heart-acrdf0q1-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
     )
 
 def criar_tabela():
@@ -62,3 +59,5 @@ def atualizar_chapa(id, largurax, larguray,espessura, material):
     conexao.commit()
     conexao.close()
 
+
+print(listar_chapas())
