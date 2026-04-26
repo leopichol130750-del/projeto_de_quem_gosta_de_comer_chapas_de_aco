@@ -1,10 +1,6 @@
 import psycopg2
 
-print("arquivo iniciou")
-
-
 def conectar():
-    print("tentando conectar...")
 
     conn = psycopg2.connect(
         host="ep-young-hat-acnrl44p-pooler.sa-east-1.aws.neon.tech",
@@ -16,7 +12,6 @@ def conectar():
         connect_timeout=5
     )
 
-    print("conectou!")
     return conn
 
 def criar_tabela():
@@ -72,10 +67,3 @@ def atualizar_chapa(id, largurax, larguray,espessura, material):
         """,(largurax, larguray, espessura, material, id))
     conexao.commit()
     conexao.close()
-
-
-criar_tabela()
-
-
-add_chapa(2000, 300, 3.20, "00004")
-print(listar_chapas())

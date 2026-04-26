@@ -149,7 +149,15 @@ function mostrarTabela(chapas) {
 
             const BotaoExcluir = acoes.querySelector(".excluir");
             BotaoExcluir.dataset.id = tam_chapa.id;
-            BotaoExcluir.addEventListener("click", function() {
+            BotaoExcluir.innerHTML = `
+                <div id="telaExclusao" class="telaExclusao">
+                    <div class="telaExclusaoConteudo>
+                        <p> Tem certeza que deseja excluir essa chapa?</p>
+                        <button id="confirmarExclusao">Confirmar</button>
+                        <button id="cancelarExclusao">Cancelar</button>
+                `
+            document.getElementById("confirmarExclusao")
+                .addEventListener("click", function() {
                 const id = this.dataset.id;
                 deletar_chapa(id);
             });
