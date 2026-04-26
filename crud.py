@@ -1,12 +1,26 @@
 import psycopg2
 
+print("arquivo iniciou")
+
+
 def conectar():
-    return psycopg2.connect(
-        "postgresql://neondb_owner:npg_dBWfMT9S3Hmb@ep-wispy-heart-acrdf0q1-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+    print("tentando conectar...")
+
+    conn = psycopg2.connect(
+        host="ep-young-hat-acnrl44p-pooler.sa-east-1.aws.neon.tech",
+        dbname="neondb",
+        user="neondb_owner",
+        password="npg_fYvGj39tzdBp",
+        port="5432",
+        sslmode="require",
+        connect_timeout=5
     )
 
+    print("conectou!")
+    return conn
+
 def criar_tabela():
-    conexao = conectar()
+    conexao = conectar() 
     cursor = conexao.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS chapas (
@@ -58,3 +72,10 @@ def atualizar_chapa(id, largurax, larguray,espessura, material):
         """,(largurax, larguray, espessura, material, id))
     conexao.commit()
     conexao.close()
+
+
+criar_tabela()
+
+
+add_chapa(2000, 300, 3.20, "00004")
+print(listar_chapas())
