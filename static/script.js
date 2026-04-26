@@ -148,19 +148,9 @@ function mostrarTabela(chapas) {
                 });
 
             const BotaoExcluir = acoes.querySelector(".excluir");
-            BotaoExcluir.dataset.id = tam_chapa.id;
-            BotaoExcluir.innerHTML = `
-                <div id="telaExclusao" class="telaExclusao">
-                    <div class="telaExclusaoConteudo>
-                        <p> Tem certeza que deseja excluir essa chapa?</p>
-                        <button id="confirmarExclusao">Confirmar</button>
-                        <button id="cancelarExclusao">Cancelar</button>
-                `
-            document.getElementById("confirmarExclusao")
-                .addEventListener("click", function() {
-                const id = this.dataset.id;
-                deletar_chapa(id);
-            });
+                BotaoExcluir.addEventListener("click", () => {
+                    abrirModal(tam_chapa.id)   
+                });
 
             let desenho = document.createElement("div");
                 desenho.classList.add("desenho");
@@ -228,3 +218,23 @@ function atualizarPreviewEdicao() {
 
 document.getElementById("edit_x").addEventListener("input", atualizarPreviewEdicao);
 document.getElementById("edit_y").addEventListener("input", atualizarPreviewEdicao)
+
+
+let IdParaExcluir = null;
+
+function abrirModal(id) {
+    IdParaExcluir = id;
+    document.getElementById("modalExclusao").style.display = "block";
+}
+
+function fecharModal() {
+    document.getElementById("modalExclusao").style.display = "none";
+}
+
+document.getElementById("confirmarExclusao")
+    .addEventListener("click", function () {
+        if (IdParaExcluir !== null) {
+            deletar_chapa(IdParaExcluir);
+            fecharModal();
+        }
+    })

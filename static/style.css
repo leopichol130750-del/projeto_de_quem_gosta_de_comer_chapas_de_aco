@@ -262,7 +262,7 @@ input {
     align-items: center;
     justify-content: center;
     background-color: #020b15;
-    border: 2px solid #377997;
+    border: 2px solid #c4eef4;
     border-radius: 4px;
 }
 
@@ -271,7 +271,22 @@ input {
     margin-top: -2%;
 }
 
-
+.modal {
+    display: none;
+    position: fixed;
+    color: white;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #020b15;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+    border: 2px solid #377997;
+    text-align: center;
+    box-shadow: 0 0 15px #000000;
+    z-index: 1000;
+}
 
 
 
