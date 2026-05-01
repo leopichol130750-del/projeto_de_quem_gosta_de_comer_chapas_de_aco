@@ -1,6 +1,7 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, session, redirect
 from flask_cors import CORS
 import crud
+import bcrypt
 
 
 
@@ -10,6 +11,8 @@ CORS(app)
 
 @app.route("/")
 def home():
+    if not session.get("logado"):
+        return redirect("/login")
     return render_template("interface.html")
 
 @app.route("/adicionar", methods=["POST"])
@@ -91,7 +94,24 @@ def atualizar(id):
     except Exception as e:
         return jsonify({"success": False, "erro": str(e)}), 500
 
+app.secret_key = "abc"
+usuarioCadastro = "pao"
 
+senhaHash = b"$2b$12$ElJBdpxVKv3Bs3lSMArDDedQopMIFswvWXWdlODC7IlhhK4HzPvvm"
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        senha = request.form.get("senha").encode("utf-8")
+        usuario = request.form.get("usuario")
+
+        if bcrypt.checkpw(senha, senhaHash) and usuario == "pao":
+            session["logado"] = True
+            return redirect("/")
+        else:
+            return "Usuário ou senha incorretos", 401
+    return render_template("login.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

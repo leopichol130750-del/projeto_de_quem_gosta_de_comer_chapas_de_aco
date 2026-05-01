@@ -148,7 +148,7 @@ function mostrarTabela(chapas) {
                 });
 
             const BotaoExcluir = acoes.querySelector(".excluir");
-                BotaoExcluir.addEventListener("click", () => {
+            BotaoExcluir.addEventListener("click", () => {
                     abrirModal(tam_chapa.id)   
                 });
 
@@ -218,7 +218,6 @@ function atualizarPreviewEdicao() {
 
 document.getElementById("edit_x").addEventListener("input", atualizarPreviewEdicao);
 document.getElementById("edit_y").addEventListener("input", atualizarPreviewEdicao)
-
 
 let IdParaExcluir = null;
 

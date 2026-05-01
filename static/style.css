@@ -6,6 +6,7 @@ body {
     overflow: hidden;
     overflow-x: hidden;
     font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #020b15;
 }
 .dashboard {
     display: flex;
@@ -14,7 +15,7 @@ body {
 
 .sidebar {
     width: 250px;
-    background-color: #020b15;
+    background-color: black;
     color:rgb(255, 255, 255);
     padding:20px;
 }
@@ -63,7 +64,7 @@ body {
     transform: translateX(5px);
 }
 
-input {
+#inputs_chapas input {
     width: 20%;
     padding: 10px;
     margin: 10px 0;
@@ -262,7 +263,7 @@ input {
     align-items: center;
     justify-content: center;
     background-color: #020b15;
-    border: 2px solid #c4eef4;
+    border: 2px solid #377997;
     border-radius: 4px;
 }
 
@@ -289,5 +290,105 @@ input {
 }
 
 
+.modalConteudo button {
+    width:120px;
+    height: 30px;
+    color: white;
+    background-color: #000000;
+    border: 1px solid #377997;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
+.modalConteudo button:hover {
+    background-color: #04172a;
+    transform: translateX(-3px);
+    border-color: #c4eef4;
+}
+    
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: #020b15;
+    padding: 40px;
+    border-radius: 12px;
+    width: 400px;
+    height: 400px;
+    box-shadow: 0 10px 30px #000000;
+    border: 1px solid #377997;
+    text-align: center;
+    gap: 20px;
+}
+.loginPag {
+    height: 100vh;
 
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login h2 {
+    color:white;
+    margin-bottom: 25px;
+}
+
+.loginInputs {
+    display:flex;
+    flex-direction: column;
+    gap:15px;
+    width: 100%;
+}
+
+.loginInputs input {
+    width: 100%;
+    padding: 16px;
+    font-size:16px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: 1px solid #c4eef4;
+    background-color: #000000;
+    color: white;
+    font-size: 14px;
+    
+
+}
+
+.loginInputs input::placeholder{
+    color: white;
+}
+
+.loginInputs button {
+    width: 100%;
+    padding:14px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 2px solid #377997;
+    background-color: #92bff2;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.loginInputs button:hover {
+    background-color: #b0d8ea;
+    transform: translate(-2px);
+}
+
+.loginInputs button:active {
+    transform: scale(0.95);
+}
+
+.sidebar button{
+    background-color: #92bff2;
+    border: 2px solid #377997;
+    width: 100%;
+    margin:10px 0;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
