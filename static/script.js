@@ -237,3 +237,15 @@ document.getElementById("confirmarExclusao")
             fecharModal();
         }
     })
+
+function showPopup(message, type = "success") {
+    const popup = document.getElementById("popup");
+    popup.className = `toast ${type}`;
+    popup.innerHTML = message;
+
+    popup.classList.add("show");
+
+    setTimeout(() => {
+        TransformStream.classList.remove("show");
+    }, 2000);
+}
