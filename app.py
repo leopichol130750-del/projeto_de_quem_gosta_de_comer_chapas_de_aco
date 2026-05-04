@@ -33,7 +33,7 @@ def adicionar():
         mat = dados["material"].strip()
 
         crud.add_chapa(x, y, esp, mat)
-        return jsonify({"mensagem": "adicionado"}), 201
+        return jsonify({"success": True, "mensagem": "adicionado"}), 201
     
     except Exception as e:
         return jsonify({"success": False, "erro": str(e)}), 500
@@ -63,7 +63,7 @@ def listar():
 def deletar(id):
     try:
         crud.deletar_chapa(id)
-        return jsonify({"mensagem": "deletado"}), 200
+        return jsonify({"success": True, "mensagem": "deletado"}), 200
     
     except Exception as e:
         return jsonify({"success": False, "erro": str(e)}), 500
@@ -89,7 +89,7 @@ def atualizar(id):
         esp = float(dados["espessura"])
         mat = dados["material"].strip()
         crud.atualizar_chapa(id, x, y, esp, mat)
-        return jsonify({"mensagem": "atualizado"}), 200
+        return jsonify({"success": True, "mensagem": "atualizado"}), 200
     
     except Exception as e:
         return jsonify({"success": False, "erro": str(e)}), 500

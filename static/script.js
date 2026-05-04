@@ -19,7 +19,9 @@ function mostrar_aba(nome_aba) {
     
 
 document.getElementById("BotaoAddChapa")
-    .addEventListener("click", () => mostrar_aba("adicionar"));
+    .addEventListener("click", () => {
+        mostrar_aba("adicionar");
+    });
 
 document.getElementById("BotaoSalvar")
     .addEventListener("click", function () {
@@ -54,12 +56,18 @@ function adicionar_chapa() {
         })
             .then(res => res.json())
             .then(data => {
-                console.log("Salvo no Banco de dados", data)
+                if (data.success) {
+                    showPopup("Chapa Salva com sucesso!", "success");
+                    document.getElementById("x").value = "";
+                    document.getElementById("y").value = "";
+                    document.getElementById("esp").value = "";
+                    document.getElementById("mat").value = "";
+                }
+                else {
+                    showPopup("Erro ao salvar a Chapa!", "error");
+                }
             })
-        document.getElementById("x").value = "";
-        document.getElementById("y").value = "";
-        document.getElementById("esp").value = "";
-        document.getElementById("mat").value = "";
+        
     }
 }
 
@@ -83,8 +91,15 @@ function deletar_chapa(id) {
     fetch(`http://127.0.0.1:5000/deletar/${id}`, {
         method: "DELETE"
     })
-        .then(() => {
+        .then(res => res.json())
+        .then(data => {
             listar_chapas();
+            if (data.success){
+                showPopup("Chapa excluida com sucesso!", "success");
+            }
+            else{
+                showPopup("Erro ao excluir chapa!", "error");
+            }
         });
 }
 
@@ -92,7 +107,6 @@ function deletar_chapa(id) {
 
 let idEditada;
 function salvar_edicao() {
-    console.log("ID", idEditada)
     fetch(`http://127.0.0.1:5000/atualizar/${idEditada}`, {
         method: "PUT",
         headers: {
@@ -106,8 +120,14 @@ function salvar_edicao() {
         })
     })
         .then(res => res.json())
-        .then(() => {
+        .then(data => {
             listar_chapas();
+            if (data.success) {
+                showPopup("Chapa atualizada!", "success");
+            } 
+            else {
+                showPopup("Erro ao atualizar chapa", "error");
+            }
         });
 }
 
@@ -191,7 +211,6 @@ function abrirZoom (chapa){
 
 function desenharPreviewEdicao(x,y) {
     const preview = document.getElementById("previewEdicao");
-    console.log(preview);
     preview.innerHTML = "";
 
     let maior = Math.max(x,y);
@@ -240,12 +259,12 @@ document.getElementById("confirmarExclusao")
 
 function showPopup(message, type = "success") {
     const popup = document.getElementById("popup");
-    popup.className = `toast ${type}`;
+    popup.className = `popup ${type}`;
     popup.innerHTML = message;
 
     popup.classList.add("show");
 
     setTimeout(() => {
-        TransformStream.classList.remove("show");
+        popup.classList.remove("show");
     }, 2000);
 }
