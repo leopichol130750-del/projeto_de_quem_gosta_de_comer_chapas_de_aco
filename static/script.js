@@ -1,4 +1,3 @@
-let modoEdicao = false;
 
 function mostrar_aba(nome_aba) {
     document.getElementById("inputs_chapas").style.display = "none";
@@ -58,6 +57,7 @@ function adicionar_chapa() {
             .then(data => {
                 if (data.success) {
                     showPopup("Chapa Salva com sucesso!", "success");
+                    listar_chapas();
                     document.getElementById("x").value = "";
                     document.getElementById("y").value = "";
                     document.getElementById("esp").value = "";
@@ -87,7 +87,7 @@ function listar_chapas(){
 }
 
 function deletar_chapa(id) {
-    fetch(`${window.location.origin}/${id}`, {
+    fetch(`${window.location.origin}/deletar/${id}`, {
         method: "DELETE"
     })
         .then(res => res.json())
