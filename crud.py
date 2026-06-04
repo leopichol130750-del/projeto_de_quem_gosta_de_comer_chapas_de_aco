@@ -7,16 +7,7 @@ load_dotenv()
 
 def conectar():
 
-    conn = psycopg2.connect(
-        host="ep-young-hat-acnrl44p-pooler.sa-east-1.aws.neon.tech",
-        dbname="neondb",
-        user="neondb_owner",
-        password=os.getenv("DB_PASSWORD"),
-        port="5432",
-        sslmode="require",
-        connect_timeout=5
-    )
-
+    conn = psycopg2.connect("DATABASE_URL")
     return conn
 
 def criar_tabela():
