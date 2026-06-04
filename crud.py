@@ -2,12 +2,11 @@ import psycopg2
 from bcrypt import hashpw, gensalt, checkpw
 from dotenv import load_dotenv
 import os
-
 load_dotenv()
 
 def conectar():
 
-    conn = psycopg2.connect("DATABASE_URL")
+    conn = psycopg2.connect(os.getenv("DATABASE_URL"))
     return conn
 
 def criar_tabela():
