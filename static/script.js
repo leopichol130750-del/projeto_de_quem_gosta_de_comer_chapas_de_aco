@@ -1,4 +1,4 @@
-
+let modoEdicao = false
 function mostrar_aba(nome_aba) {
     document.getElementById("inputs_chapas").style.display = "none";
     document.getElementById("lista").style.display = "none";
