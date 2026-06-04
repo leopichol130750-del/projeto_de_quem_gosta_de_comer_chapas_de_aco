@@ -1,13 +1,15 @@
 from flask import Flask, request, jsonify, render_template, session, redirect
 from flask_cors import CORS
+from dotenv import load_dotenv
 import crud
-import bcrypt
+import os
 
-
-
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
+app.secret_key = os.getenv("SECRET_KEY")
+
 
 @app.route("/")
 def home():
@@ -59,6 +61,9 @@ def listar():
     except Exception as e:
         return jsonify({"success": False, "erro": str(e)}), 500
 
+
+
+
 @app.route("/deletar/<int:id>", methods=["DELETE"])
 def deletar(id):
     try:
@@ -94,24 +99,22 @@ def atualizar(id):
     except Exception as e:
         return jsonify({"success": False, "erro": str(e)}), 500
 
-app.secret_key = "abc"
-usuarioCadastro = "pao"
-
-senhaHash = b"$2b$12$ElJBdpxVKv3Bs3lSMArDDedQopMIFswvWXWdlODC7IlhhK4HzPvvm"
-
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == "POST":
-        senha = request.form.get("senha").encode("utf-8")
-        usuario = request.form.get("usuario")
+    if request.method == "GET":
+        return render_template("login.html")
+    
+    login = request.form.get("usuario")
+    senha = request.form.get("senha")
 
-        if bcrypt.checkpw(senha, senhaHash) and usuario == "pao":
-            session["logado"] = True
-            return redirect("/")
-        else:
-            return "Usuário ou senha incorretos", 401
-    return render_template("login.html")
+    usuario = crud.autenticar_usuario(login, senha)
+
+    if usuario:
+        session["logado"] = True
+        return redirect("/")
+    return "Usuário ou senha inválidos"
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+crud.criar_tabela()

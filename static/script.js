@@ -78,9 +78,8 @@ document.getElementById("BotaoListarChapas")
         listar_chapas();
     });
 
-
 function listar_chapas(){
-    fetch("http://127.0.0.1:5000/listar")
+    fetch(`http://127.0.0.1:5000/listar`)
         .then(res => res.json())
         .then(dados => {
             mostrarTabela(dados);

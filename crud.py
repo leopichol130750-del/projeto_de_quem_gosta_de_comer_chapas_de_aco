@@ -1,4 +1,9 @@
 import psycopg2
+from bcrypt import hashpw, gensalt, checkpw
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 def conectar():
 
@@ -6,7 +11,7 @@ def conectar():
         host="ep-young-hat-acnrl44p-pooler.sa-east-1.aws.neon.tech",
         dbname="neondb",
         user="neondb_owner",
-        password="npg_fYvGj39tzdBp",
+        password=os.getenv("DB_PASSWORD"),
         port="5432",
         sslmode="require",
         connect_timeout=5
@@ -26,16 +31,24 @@ def criar_tabela():
             material TEXT
         )                
         """)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS usuarios (
+            id SERIAL PRIMARY KEY,
+            login VARCHAR(50) UNIQUE NOT NULL,
+            senha TEXT NOT NULL
+            )
+        """)
     conexao.commit()
     conexao.close()
+
 
 def add_chapa(x, y, espessura, material):
     conexao = conectar()
     cursor = conexao.cursor()
     cursor.execute("""
-    INSERT INTO chapas (largurax, larguray, espessura, material)
-    VALUES (%s, %s, %s, %s)
-    """, (x, y, espessura, material))
+        INSERT INTO chapas (largurax, larguray, espessura, material)
+        VALUES (%s, %s, %s, %s)
+        """, (x, y, espessura, material))
     conexao.commit()
     conexao.close()
 
@@ -68,3 +81,41 @@ def atualizar_chapa(id, largurax, larguray,espessura, material):
     conexao.commit()
     conexao.close()
 
+def cadastro(senha):
+    conexao = conectar()
+    cursor = conexao.cursor()
+    hash_senha = hashpw(senha.encode(), gensalt()).decode()
+    cursor.execute(
+        "INSERT INTO usuarios (login, senha) VALUES (%s, %s)",
+        ("COLOCAR_NOME_DE_USUARIO_AQUI", hash_senha)
+        )
+    conexao.commit()
+    cursor.close()
+
+def buscar_usuario(login):
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute(
+        "SELECT id, login, senha FROM usuarios WHERE login = %s",
+        (login,)
+    )
+    usuario = cursor.fetchone()
+
+    cursor.close()
+    conexao.close()
+    return usuario
+
+
+def autenticar_usuario(login, senha):
+    usuario = buscar_usuario(login)
+
+    if usuario is None:
+        return None
+    
+    elif checkpw(
+        senha.encode(),
+        usuario[2].encode()
+    ):
+        return usuario
+    
+    return None
