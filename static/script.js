@@ -42,7 +42,7 @@ function adicionar_chapa() {
         alert("Preecha os campos corretamente!");
     }
     else {
-        fetch("http://127.0.0.1:5000/adicionar", {
+        fetch(`${window.location.origin}/adicionar`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -79,7 +79,7 @@ document.getElementById("BotaoListarChapas")
     });
 
 function listar_chapas(){
-    fetch(`http://127.0.0.1:5000/listar`)
+    fetch(`${window.location.origin}/listar`)
         .then(res => res.json())
         .then(dados => {
             mostrarTabela(dados);
@@ -87,7 +87,7 @@ function listar_chapas(){
 }
 
 function deletar_chapa(id) {
-    fetch(`http://127.0.0.1:5000/deletar/${id}`, {
+    fetch(`${window.location.origin}/${id}`, {
         method: "DELETE"
     })
         .then(res => res.json())
@@ -106,7 +106,7 @@ function deletar_chapa(id) {
 
 let idEditada;
 function salvar_edicao() {
-    fetch(`http://127.0.0.1:5000/atualizar/${idEditada}`, {
+    fetch(`${window.location.origin}/atualizar/${idEditada}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

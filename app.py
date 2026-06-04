@@ -6,6 +6,8 @@ import os
 
 load_dotenv()
 
+
+
 app = Flask(__name__)
 CORS(app)
 app.secret_key = os.getenv("SECRET_KEY")
@@ -106,14 +108,12 @@ def login():
     
     login = request.form.get("usuario")
     senha = request.form.get("senha")
-
     usuario = crud.autenticar_usuario(login, senha)
 
     if usuario:
         session["logado"] = True
         return redirect("/")
     return "Usuário ou senha inválidos"
-
 if __name__ == "__main__":
     crud.criar_tabela()
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
