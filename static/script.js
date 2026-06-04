@@ -37,9 +37,12 @@ function adicionar_chapa() {
     let esp = Number(document.getElementById("esp").value);
     let mat = document.getElementById("mat").value;
 
-    if (x < 0 || x > 3000 || y < 0 || y > 1210 || !esp || mat === "") {
-        alert("Preecha os campos corretamente!");
-    }
+    if (
+        x < 0 || x > 3001 ||
+        y < 0 || y > 1211 ||
+        isNaN(esp) ||
+        mat.trim() === "") 
+        showPopup("Preencha os campos corretamente", "error");
     else {
         fetch(`${window.location.origin}/adicionar`, {
             method: "POST",
@@ -57,7 +60,6 @@ function adicionar_chapa() {
             .then(data => {
                 if (data.success) {
                     showPopup("Chapa Salva com sucesso!", "success");
-                    listar_chapas();
                     document.getElementById("x").value = "";
                     document.getElementById("y").value = "";
                     document.getElementById("esp").value = "";
